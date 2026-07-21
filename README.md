@@ -1,37 +1,56 @@
 # Ritual Ink Bloom for Codex
 
-An unofficial Windows theme launcher for the Microsoft Store Codex desktop app. It starts the official app with a loopback-only Chromium DevTools Protocol (CDP) port and injects a reversible CSS/JS theme into its renderer. It does not modify `WindowsApps`, `app.asar`, application signatures, user authentication, tasks, plugins, or Codex settings.
+> 面向 Windows 的 Codex 桌面端主题启动器。原生交互不变，主题可还原，不改官方安装目录。
 
-`Ritual Ink Bloom` is the bundled sample preset: a generated ink-and-petal illustration, a matching desktop/thumbnail icon, and a CSS-only falling-petal layer. The title is a maintainer-defined theme name and does not identify or claim to represent any character or official artwork.
+![Ritual Ink Bloom 主题背景示例](assets/ritual-ink-bloom-wallpaper.jpg)
 
-## What It Does
+`Ritual Ink Bloom` 是内置示例主题：水墨、深蓝与落樱构成的生成式壁纸，搭配定制桌面/缩略图图标，以及低开销的樱花动态效果。该名称仅是主题标签，不指向或声称代表任何角色、作品或权利方。
 
-- Keeps Codex controls real and interactive: sidebar, task pages, project picker, composer, and menus remain native UI.
-- Uses a single generated wallpaper as a low-opacity task-page atmosphere layer.
-- Uses 26 CSS petals animated only through `transform` and `opacity`; they are behind app content, have no canvas, and do not receive pointer events.
-- Keeps the desktop shortcut and taskbar thumbnail on the bundled icon, while the fixed taskbar button retains the official Codex package icon.
-- Runs the Node injector and icon helper hidden. No terminal, tray icon, or extra window is created.
-- Supports custom wallpapers and theme metadata. See [the custom theme guide](docs/CUSTOM_THEME_GUIDE.md).
+## 主要特点
 
-## Requirements
+| 功能 | 说明 |
+| --- | --- |
+| 精美主题 | 一张纯壁纸覆盖主题氛围；首页突出画面，任务页自动降噪，避免影响阅读与输入。 |
+| 个性化图标 | 桌面快捷方式与任务栏缩略图使用主题图标；固定任务栏按钮保持官方 Codex 图标，避免 Windows 应用身份混乱。 |
+| 樱花动态特效 | 26 个 CSS 粒子，仅使用 `transform` 与 `opacity` 动画；无 Canvas、不拦截点击，并尊重“减少动态效果”系统设置。 |
+| 原生交互 | 侧栏、项目选择、任务内容、输入框和菜单仍是官方 Codex 的真实控件，不是整窗截图。 |
+| 宠物兼容 | 自动跳过透明宠物悬浮窗，避免主题背景覆盖宠物窗口。 |
+| 无感启动 | 快捷方式通过隐藏运行器启动，不显示 PowerShell、Node、托盘图标或额外窗口。 |
+| 随时还原 | 关闭主题注入即可恢复官方外观；不会修改官方文件。 |
 
-- Official Microsoft Store `OpenAI.Codex` app registered for the current Windows user.
-- Node.js 22 or newer available on `PATH`.
-- Windows PowerShell 5.1 or newer.
+<p align="center">
+  <img src="assets/ritual-ink-bloom-icon.png" width="128" alt="Ritual Ink Bloom 示例图标">
+</p>
 
-## Install
+## 安全边界
 
-Run from this repository root:
+- **不修改** `WindowsApps`、`app.asar`、官方安装目录或代码签名。
+- **不会**自动改写 API Key / Base URL；中转配置与换肤功能相互独立。
+- 不修改 Codex 登录信息、任务、插件或应用设置。
+- CDP 调试端口只绑定 `127.0.0.1`。该端口没有同用户身份认证，主题运行期间请勿运行不可信的本机程序。
+- 本项目不是 OpenAI 官方产品，也不受 OpenAI 认可或赞助。
+
+## 运行要求
+
+- 已为当前 Windows 用户注册的 Microsoft Store 官方 `OpenAI.Codex` 应用。
+- `PATH` 中可用的 Node.js 22 或更高版本。
+- Windows PowerShell 5.1 或更高版本。
+
+## 安装
+
+在仓库根目录运行：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy RemoteSigned -File .\install.ps1 -ShortcutName Codex
 ```
 
-The installer copies the engine to `%LOCALAPPDATA%\CodexThemeLauncher\engine`, prepares `%LOCALAPPDATA%\CodexThemeLauncher\active-theme`, and creates hidden-launch shortcuts. Start the generated `Codex` shortcut for the themed app. If an unthemed Codex process is already open, this shortcut restarts it so CDP can be enabled; unsaved composer text can be lost.
+安装器会将运行时复制到 `%LOCALAPPDATA%\CodexThemeLauncher\engine`，初始化 `%LOCALAPPDATA%\CodexThemeLauncher\active-theme`，并创建隐藏启动的快捷方式。之后通过生成的 `Codex` 快捷方式进入主题版。
 
-## Custom Themes
+若 Codex 已以非主题方式打开，快捷方式会重启它以开启仅本机可访问的 CDP 端口；未发送的输入内容可能丢失。
 
-The quickest path is to supply a clean wallpaper and let the included script update the active theme:
+## 自定义主题
+
+最快方式是准备一张没有 UI、文字、按钮或水印的纯壁纸，然后运行：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy RemoteSigned -File "$env:LOCALAPPDATA\CodexThemeLauncher\engine\scripts\set-background.ps1" `
@@ -40,22 +59,18 @@ powershell -NoProfile -ExecutionPolicy RemoteSigned -File "$env:LOCALAPPDATA\Cod
   -Accent "#c58ac8"
 ```
 
-Use a pure wallpaper, not a screenshot containing Codex UI. Supported formats are `.svg`, `.jpg`, `.jpeg`, `.png`, `.webp`, and `.gif`; the file must be 16 MB or smaller. For a named preset, focus point, safe area, and a ready-to-paste Codex prompt, follow [docs/CUSTOM_THEME_GUIDE.md](docs/CUSTOM_THEME_GUIDE.md).
+支持 `.svg`、`.jpg`、`.jpeg`、`.png`、`.webp`、`.gif`，文件不超过 16 MB。主题名称、焦点、安全区、任务页表现，以及可直接粘贴给 Codex 的中文提示词，见 [自定义主题指南](docs/CUSTOM_THEME_GUIDE.md)。
 
-## Restore
+## 还原官方外观
 
-Close Codex, then run:
+关闭 Codex 后执行：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy RemoteSigned -File "$env:LOCALAPPDATA\CodexThemeLauncher\engine\scripts\restore-codex-skin.ps1"
 ```
 
-## Safety
+## 归属与素材声明
 
-- CDP is bound only to `127.0.0.1`, but it has no same-user authentication. Do not run untrusted local software while the themed session is active.
-- This is not an OpenAI product and is not affiliated with or endorsed by OpenAI.
-- Codex and OpenAI names, marks, and application assets belong to their respective owners.
+本仓库的主题 CSS 与渲染注入器在 [Fei-Away/Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin) Windows 实现基础上进行了修改，遵循随仓库附带的 MIT 许可证。具体来源、软件许可与示例素材的独立权利声明见 [NOTICE.md](NOTICE.md)。
 
-## Attribution and Artwork
-
-This repository contains modified work based on the Windows renderer/theme implementation from [Fei-Away/Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin). The included MIT license and [NOTICE.md](NOTICE.md) describe the attribution, license terms, and the separate status of the bundled demonstration artwork.
+示例壁纸与图标仅用于演示预设，未包含在 MIT 软件许可证中。公开再分发、商用或二次使用前，请自行确认相关图片生成服务、素材、商标及其他权利。

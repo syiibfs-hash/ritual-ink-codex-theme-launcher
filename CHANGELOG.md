@@ -1,8 +1,8 @@
-# Changelog
+# 更新日志
 
 ## 1.0.0 - 2026-07-21
 
-- Initial public-source preparation for the Windows-only Codex theme launcher.
-- Added the `Ritual Ink Bloom` generated demonstration preset.
-- Added CSS-only falling petals and the desktop/thumbnail icon policy.
-- Added upstream MIT attribution, artwork notice, and custom-theme guide.
+- 首次整理 Windows 专用 Codex 主题启动器的公开源码。
+- 加入 `Ritual Ink Bloom` 生成式示例预设。
+- 加入 CSS 樱花动态效果与桌面/缩略图图标策略。
+- 加入上游 MIT 归属、素材声明和中文自定义主题指南。

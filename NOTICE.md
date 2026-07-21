@@ -1,21 +1,21 @@
-# Notices
+# 声明与归属
 
-## Upstream attribution
+## 上游归属
 
-This repository includes modified theme assets and renderer code based on the Windows implementation in `Fei-Away/Codex-Dream-Skin`:
+本仓库的部分主题资源与渲染器代码修改自 `Fei-Away/Codex-Dream-Skin` 的 Windows 实现：
 
-- Upstream repository: https://github.com/Fei-Away/Codex-Dream-Skin
-- Upstream copyright: Copyright (c) 2026 Codex Dream Skin Studio contributors
-- Upstream license: MIT, reproduced in [LICENSE](LICENSE)
+- 上游仓库：https://github.com/Fei-Away/Codex-Dream-Skin
+- 上游版权：Copyright (c) 2026 Codex Dream Skin Studio contributors
+- 上游许可证：MIT，全文见 [LICENSE](LICENSE)
 
-The following local files are modified derivatives of that implementation: `assets/dream-skin.css`, `assets/renderer-inject.js`, and `assets/theme.json`. This project also uses the same external, loopback-only CDP theme-injection approach.
+下列文件属于在上游基础上的修改版本：`assets/dream-skin.css`、`assets/renderer-inject.js` 与 `assets/theme.json`。本项目同样使用外部、仅回环地址的 CDP 注入方式。
 
-## Artwork and marks
+## 示例素材与商标
 
-`Ritual Ink Bloom` is a maintainer-defined label for the bundled generated demonstration preset. It does not identify, depict by name, or claim endorsement by any character, franchise, artist, or rights holder. The bundled wallpaper and icon are example assets and are excluded from the MIT software license. Anyone reusing or redistributing them is responsible for an independent review of applicable model-output, artwork, trademark, and other rights.
+`Ritual Ink Bloom` 是维护者定义的生成式示例主题名称，不指向、不以名称描绘、也不声称获得任何角色、作品、艺术家或权利方的认可。内置壁纸和图标是演示素材，不属于 MIT 软件许可证的授权范围。任何复用、公开再分发或商业使用者，都应自行评估图片生成服务条款、源素材、商标和其他相关权利。
 
-This project is unofficial and is not affiliated with, endorsed by, or sponsored by OpenAI. The OpenAI and Codex names, logos, product appearance, and application binaries are not licensed by this repository.
+本项目不是 OpenAI 官方产品，不受 OpenAI 认可、赞助或背书。OpenAI、Codex 名称、标识、产品外观与应用二进制文件均不由本仓库授权。
 
-## Runtime security
+## 运行时安全
 
-Themes use Chromium DevTools Protocol on `127.0.0.1`. A same-user process can attach to that debugging endpoint while Codex is running. Treat the active session as sensitive and close Codex or run the restore script when finished.
+主题通过 `127.0.0.1` 上的 Chromium DevTools Protocol 注入。同一 Windows 用户下的其他进程可能在 Codex 运行时连接该调试端口。请将主题会话视为敏感状态，结束使用时关闭 Codex 或运行还原脚本。
