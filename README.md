@@ -2,6 +2,8 @@
 
 > 面向 Windows 的 Codex 桌面端主题启动器。原生交互不变，主题可还原，不改官方安装目录。
 
+> **仅支持 Windows。** 本项目为 Microsoft Store 版 Codex Windows 桌面应用设计；macOS 与 Linux 不在支持范围内。
+
 ![Ritual Ink Bloom 主题背景示例](assets/ritual-ink-bloom-wallpaper.jpg)
 
 `Ritual Ink Bloom` 是内置示例主题：水墨、深蓝与落樱构成的生成式壁纸，搭配定制桌面/缩略图图标，以及低开销的樱花动态效果。该名称仅是主题标签，不指向或声称代表任何角色、作品或权利方。
@@ -10,6 +12,7 @@
 
 | 功能 | 说明 |
 | --- | --- |
+| Windows 专用 | 面向 Microsoft Store 官方 Codex Windows 桌面应用的窗口、快捷方式与任务栏行为设计。 |
 | 精美主题 | 一张纯壁纸覆盖主题氛围；首页突出画面，任务页自动降噪，避免影响阅读与输入。 |
 | 个性化图标 | 桌面快捷方式与任务栏缩略图使用主题图标；固定任务栏按钮保持官方 Codex 图标，避免 Windows 应用身份混乱。 |
 | 樱花动态特效 | 26 个 CSS 粒子，仅使用 `transform` 与 `opacity` 动画；无 Canvas、不拦截点击，并尊重“减少动态效果”系统设置。 |
@@ -22,6 +25,18 @@
   <img src="assets/ritual-ink-bloom-icon.png" width="128" alt="Ritual Ink Bloom 示例图标">
 </p>
 
+## 主题实机示例
+
+下列为 Windows 版 Codex 的实际主题效果。已移除任务标题、会话内容、账户信息、本机路径和后台输出，仅保留通用界面占位内容用于展示布局与主题表现。
+
+### 首页
+
+![Windows 首页主题预览](docs/images/windows-home-preview.png)
+
+### 任务页
+
+![Windows 任务页主题预览](docs/images/windows-task-preview.png)
+
 ## 安全边界
 
 - **不修改** `WindowsApps`、`app.asar`、官方安装目录或代码签名。
@@ -32,6 +47,7 @@
 
 ## 运行要求
 
+- Windows 10 或 Windows 11；本项目不支持 macOS 或 Linux。
 - 已为当前 Windows 用户注册的 Microsoft Store 官方 `OpenAI.Codex` 应用。
 - `PATH` 中可用的 Node.js 22 或更高版本。
 - Windows PowerShell 5.1 或更高版本。

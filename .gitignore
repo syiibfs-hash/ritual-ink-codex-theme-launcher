@@ -14,3 +14,8 @@ auth.json
 active-theme/
 themes/
 images/
+
+# Publish only the reviewed, sanitized documentation screenshots.
+!docs/images/
+!docs/images/windows-home-preview.png
+!docs/images/windows-task-preview.png
