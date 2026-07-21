@@ -62,11 +62,11 @@ html.codex-dream-skin body {
 }
 
 html.codex-dream-skin aside.app-shell-left-panel {
-  color: var(--dream-text) !important;
-  background: var(--dream-sidebar) !important;
-  border-color: var(--dream-line-soft) !important;
-  box-shadow: inset -1px 0 var(--dream-line-soft) !important;
-  backdrop-filter: none !important;
+  color: #e8e4da !important;
+  background: linear-gradient(180deg, rgb(20 22 30 / .62), rgb(24 28 37 / .56)) !important;
+  border-color: rgb(111 132 156 / .42) !important;
+  box-shadow: inset -1px 0 rgb(111 132 156 / .28), 8px 0 24px rgb(12 15 22 / .12) !important;
+  backdrop-filter: blur(12px) saturate(.92) !important;
 }
 
 html.codex-dream-skin aside.app-shell-left-panel nav {
@@ -74,8 +74,13 @@ html.codex-dream-skin aside.app-shell-left-panel nav {
 }
 
 html.codex-dream-skin aside.app-shell-left-panel button {
-  color: var(--dream-text) !important;
+  color: #e8e4da !important;
   transition: background-color 180ms cubic-bezier(.22, 1, .36, 1), color 180ms cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+html.codex-dream-skin aside.app-shell-left-panel [class*="text-token-muted" i],
+html.codex-dream-skin aside.app-shell-left-panel [class*="text-token-secondary" i] {
+  color: rgb(232 228 218 / .72) !important;
 }
 
 html.codex-dream-skin aside.app-shell-left-panel button:hover {
@@ -297,19 +302,49 @@ html.codex-dream-skin.dream-safe-center .dream-home > div:first-child > div:firs
 }
 
 .dream-home [data-feature="game-source"] {
+  position: relative;
   display: flex !important;
   flex-direction: column !important;
   align-items: inherit !important;
   justify-content: flex-start !important;
   max-width: 100% !important;
-  color: var(--dream-text) !important;
+  color: #2a2d38 !important;
   font-size: 28px !important;
   line-height: 1.25 !important;
   font-weight: 720 !important;
   text-align: inherit !important;
-  text-shadow: 0 1px 16px var(--dream-surface);
+  text-shadow: 0 1px 0 rgb(255 252 246 / .5), 0 2px 10px rgb(31 37 48 / .12);
   opacity: 1 !important;
   pointer-events: auto !important;
+}
+
+/* The signature is paint-only: it is positioned below the native heading and
+   does not add a DOM node or change the home layout's flow. */
+.dream-home [data-feature="game-source"]::after {
+  content: "落樱未尽，构想已生。";
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(100% + 14px);
+  color: rgb(29 35 48 / .92) !important;
+  font-family: STKaiti, KaiTi, "Kaiti SC", "FZKai-Z03", "Microsoft YaHei UI", serif;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  line-height: 1.5;
+  letter-spacing: .08em;
+  text-shadow: 0 1px 0 rgb(255 252 246 / .42), 0 2px 7px rgb(25 31 43 / .16);
+  -webkit-text-stroke: .15px rgb(29 35 48 / .38);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+html.codex-dream-skin.dream-safe-right .dream-home [data-feature="game-source"]::after {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+html.codex-dream-skin.dream-safe-center .dream-home [data-feature="game-source"]::after {
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
 }
 
 .dream-home [data-feature="game-source"] button {
@@ -409,20 +444,17 @@ html.codex-dream-skin.dream-art-wide:has(main.main-surface.dream-home-shell)
   aside.app-shell-left-panel,
 html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface:not(.dream-home-shell))
   aside.app-shell-left-panel {
-  background: linear-gradient(90deg,
-    var(--dream-immersive-sidebar),
-    var(--dream-immersive-edge)) !important;
+  background: linear-gradient(180deg, rgb(20 22 30 / .62), rgb(24 28 37 / .56)) !important;
   border: 0 !important;
+  border-right: 1px solid rgb(111 132 156 / .3) !important;
   border-radius: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
+  box-shadow: 8px 0 24px rgb(12 15 22 / .12) !important;
+  backdrop-filter: blur(12px) saturate(.92) !important;
 }
 
 html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface:not(.dream-home-shell))
   aside.app-shell-left-panel {
-  background: linear-gradient(90deg,
-    var(--dream-task-immersive-sidebar),
-    var(--dream-task-immersive-edge)) !important;
+  background: linear-gradient(180deg, rgb(20 22 30 / .64), rgb(24 28 37 / .59)) !important;
 }
 
 html.codex-dream-skin.dream-art-wide:has(main.main-surface.dream-home-shell)
@@ -599,6 +631,58 @@ html.codex-dream-skin .composer-surface-chrome .bg-gradient-to-b,
 html.codex-dream-skin .composer-surface-chrome .bg-gradient-to-r,
 html.codex-dream-skin .composer-surface-chrome .bg-gradient-to-l {
   background-image: none !important;
+}
+
+/* Ink-glass controls bridge the paper-like artwork and the native composer
+   without changing its dimensions or interaction structure. */
+html.codex-dream-skin.dream-art-wide {
+  --dream-immersive-composer: rgb(26 29 38 / .72);
+  --dream-immersive-line: rgb(78 101 126 / .78);
+}
+
+html.codex-dream-skin .composer-surface-chrome,
+html.codex-dream-skin.dream-art-wide .composer-surface-chrome,
+html.codex-dream-skin .dream-home-utility,
+html.codex-dream-skin.dream-art-wide .dream-home-utility,
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
+  main.main-surface:not(.dream-home-shell) div.no-drag:has(> input[type="text"]) {
+  background: rgb(26 29 38 / .72) !important;
+  border: 1px solid rgb(78 101 126 / .78) !important;
+  border-width: 1px !important;
+  box-shadow: 0 12px 30px rgb(12 15 22 / .2), inset 0 0 0 1px rgb(78 101 126 / .78),
+    inset 0 1px rgb(224 231 238 / .05) !important;
+  backdrop-filter: blur(10px) saturate(.94) !important;
+}
+
+html.codex-dream-skin .dream-home:has(.dream-home-utility) .composer-surface-chrome {
+  border-top-color: rgb(78 101 126 / .55) !important;
+}
+
+html.codex-dream-skin.dream-art-wide .dream-home:has(.dream-home-utility) .composer-surface-chrome {
+  background: rgb(26 29 38 / .72) !important;
+  border: 1px solid rgb(78 101 126 / .78) !important;
+  border-width: 1px !important;
+  box-shadow: 0 12px 30px rgb(12 15 22 / .2), inset 0 0 0 1px rgb(78 101 126 / .78),
+    inset 0 1px rgb(224 231 238 / .05) !important;
+  backdrop-filter: blur(10px) saturate(.94) !important;
+}
+
+/* Keep the composer primary action distinct from the background-reset rules.
+   This preserves native send/stop behavior while restoring its visual affordance. */
+html.codex-dream-skin .composer-surface-chrome button.bg-token-foreground {
+  background: rgb(196 211 222 / .94) !important;
+  border: 1px solid rgb(230 238 242 / .54) !important;
+  box-shadow: 0 3px 10px rgb(10 15 24 / .24), inset 0 1px rgb(255 255 255 / .42) !important;
+  opacity: 1 !important;
+}
+
+html.codex-dream-skin .composer-surface-chrome button.bg-token-foreground svg,
+html.codex-dream-skin .composer-surface-chrome button.bg-token-foreground svg * {
+  color: #172231 !important;
+}
+
+html.codex-dream-skin .composer-surface-chrome button.bg-token-foreground:enabled:hover {
+  background: rgb(220 230 236 / .98) !important;
 }
 
 /* A small, transform-only particle field keeps the art alive without a canvas,
