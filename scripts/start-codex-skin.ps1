@@ -17,7 +17,7 @@ $node = Get-CtlNodeRuntime
 $codex = Get-CtlCodexInstall
 $injector = Join-Path $paths.Scripts 'injector.mjs'
 $iconSyncScript = Join-Path $paths.Scripts 'sync-window-icon.ps1'
-$iconPath = Join-Path $paths.Assets 'ritual-ink-bloom.ico'
+$iconPath = Join-Path $paths.Assets 'falling-sakura.ico'
 $previousState = Read-CtlJson -Path $paths.StateFile
 Stop-CtlRecordedInjector -State $previousState
 Stop-CtlRecordedIconSync -State $previousState

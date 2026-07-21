@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-  [string]$ShortcutName = 'Codex Skin',
+  [string]$ShortcutName = 'Codex - 落樱',
   [string]$IconPath,
   [switch]$NoDesktopShortcut,
   [switch]$NoStartMenuShortcut
@@ -41,7 +41,7 @@ $node = Get-CtlNodeRuntime
 $codex = Get-CtlCodexInstall
 
 if (-not $IconPath) {
-  $bundledIcon = Join-Path $paths.Assets 'ritual-ink-bloom.ico'
+  $bundledIcon = Join-Path $paths.Assets 'falling-sakura.ico'
   $IconPath = if (Test-Path -LiteralPath $bundledIcon -PathType Leaf) { $bundledIcon } else { $codex.Executable }
 }
 

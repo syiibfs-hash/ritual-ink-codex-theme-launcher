@@ -4,7 +4,13 @@ param(
   [ValidateSet('auto', 'light', 'dark')][string]$Variant = 'auto',
   [string]$Accent = '#339cff',
   [ValidateRange(0.35, 0.96)][double]$GlassOpacity = 0.72,
-  [ValidateRange(0, 40)][int]$Blur = 22
+  [ValidateRange(0, 40)][int]$Blur = 22,
+  [string]$ThemeId,
+  [string]$ThemeName,
+  [ValidateRange(0, 1)][Nullable[double]]$FocusX,
+  [ValidateRange(0, 1)][Nullable[double]]$FocusY,
+  [ValidateSet('left', 'center', 'right', 'none')][string]$SafeArea,
+  [ValidateSet('ambient', 'banner', 'off')][string]$TaskMode
 )
 
 $ErrorActionPreference = 'Stop'
@@ -45,6 +51,13 @@ if ($Accent -notmatch '^#[0-9a-fA-F]{6}$') {
   throw 'Accent must be a #RRGGBB color.'
 }
 
+if ($ThemeId -and $ThemeId -notmatch '^[a-z0-9][a-z0-9-]{0,63}$') {
+  throw 'ThemeId must use lowercase letters, digits, and hyphens only.'
+}
+if ($ThemeName -and (($ThemeName = $ThemeName.Trim()).Length -gt 80)) {
+  throw 'ThemeName must be at most 80 characters.'
+}
+
 $targetName = "wallpaper$extension"
 $target = Join-Path $paths.ActiveTheme $targetName
 Copy-Item -LiteralPath $source -Destination $target -Force
@@ -72,6 +85,25 @@ Set-ThemeProperty -Object $theme -Name glassOpacity -Value $GlassOpacity
 Set-ThemeProperty -Object $theme -Name blur -Value $Blur
 Set-ThemeProperty -Object $theme -Name image -Value $targetName
 Set-ThemeProperty -Object $theme.art -Name file -Value $targetName
+if ($ThemeId) {
+  Set-ThemeProperty -Object $theme -Name id -Value $ThemeId
+}
+if ($ThemeName) {
+  Set-ThemeProperty -Object $theme -Name name -Value $ThemeName
+  Set-ThemeProperty -Object $theme -Name promoSub -Value $ThemeName
+}
+if ($null -ne $FocusX) {
+  Set-ThemeProperty -Object $theme.art -Name focusX -Value $FocusX
+}
+if ($null -ne $FocusY) {
+  Set-ThemeProperty -Object $theme.art -Name focusY -Value $FocusY
+}
+if ($SafeArea) {
+  Set-ThemeProperty -Object $theme.art -Name safeArea -Value $SafeArea
+}
+if ($TaskMode) {
+  Set-ThemeProperty -Object $theme.art -Name taskMode -Value $TaskMode
+}
 Write-CtlUtf8Json -Path (Join-Path $paths.ActiveTheme 'theme.json') -Value $theme
 
 $state = Read-CtlJson -Path $paths.StateFile

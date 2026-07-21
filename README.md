@@ -1,12 +1,12 @@
-# Ritual Ink Bloom for Codex
+# 落樱 for Codex
 
 > 面向 Windows 的 Codex 桌面端主题启动器。原生交互不变，主题可还原，不改官方安装目录。
 
 > **仅支持 Windows。** 本项目为 Microsoft Store 版 Codex Windows 桌面应用设计；macOS 与 Linux 不在支持范围内。
 
-![Ritual Ink Bloom 主题背景示例](assets/ritual-ink-bloom-wallpaper.jpg)
+![落樱主题背景示例](assets/falling-sakura-wallpaper.jpg)
 
-`Ritual Ink Bloom` 是内置示例主题：水墨、深蓝与落樱构成的生成式壁纸，搭配定制桌面/缩略图图标，以及低开销的樱花动态效果。该名称仅是主题标签，不指向或声称代表任何角色、作品或权利方。
+`落樱` 是内置示例主题：水墨、深蓝与落樱构成的生成式壁纸，搭配定制桌面/缩略图图标，以及低开销的樱花动态效果。该名称仅是主题标签，不指向或声称代表任何角色、作品或权利方。
 
 ## 主要特点
 
@@ -22,7 +22,7 @@
 | 随时还原 | 关闭主题注入即可恢复官方外观；不会修改官方文件。 |
 
 <p align="center">
-  <img src="assets/ritual-ink-bloom-icon.png" width="128" alt="Ritual Ink Bloom 示例图标">
+  <img src="assets/falling-sakura-icon.png" width="128" alt="落樱示例图标">
 </p>
 
 ## 主题实机示例
@@ -52,12 +52,18 @@
 - `PATH` 中可用的 Node.js 22 或更高版本。
 - Windows PowerShell 5.1 或更高版本。
 
+## 让 Codex 自动安装「落樱」
+
+无需手动打开终端。复制 [Codex 安装与自定义提示词](docs/CODEX_PROMPTS.md) 中的“安装当前预设：落樱”内容并发送给 Codex；Codex 会下载固定版本的发布包、校验 SHA-256，再执行本仓库的安装器。
+
+安装得到的就是本仓库当前内置预设 **落樱**，不会自动改写 API Key、Base URL、`WindowsApps` 或 `app.asar`。若要按参考图片创建新主题，使用同一文档中的“根据参考图创建自定义主题”提示词。
+
 ## 安装
 
 在仓库根目录运行：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy RemoteSigned -File .\install.ps1 -ShortcutName Codex
+powershell -NoProfile -ExecutionPolicy RemoteSigned -File .\install.ps1 -ShortcutName "Codex - 落樱"
 ```
 
 安装器会将运行时复制到 `%LOCALAPPDATA%\CodexThemeLauncher\engine`，初始化 `%LOCALAPPDATA%\CodexThemeLauncher\active-theme`，并创建隐藏启动的快捷方式。之后通过生成的 `Codex` 快捷方式进入主题版。

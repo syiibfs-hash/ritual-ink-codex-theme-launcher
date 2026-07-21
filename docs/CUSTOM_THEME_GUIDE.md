@@ -9,12 +9,18 @@
 powershell -NoProfile -ExecutionPolicy RemoteSigned -File "$env:LOCALAPPDATA\CodexThemeLauncher\engine\scripts\set-background.ps1" `
   -ImagePath "C:\path\to\wallpaper.jpg" `
   -Variant dark `
-  -Accent "#c58ac8"
+  -Accent "#c58ac8" `
+  -ThemeId "preset-my-theme" `
+  -ThemeName "我的主题" `
+  -FocusX 0.72 `
+  -FocusY 0.45 `
+  -SafeArea left `
+  -TaskMode ambient
 ```
 
 3. 如果 Codex 没有通过主题快捷方式运行，重新从生成的 `Codex` 快捷方式启动。
 
-该命令会将壁纸复制到活动主题目录、更新 `theme.json`，并在主题会话已运行时重新注入。
+该命令会将壁纸复制到活动主题目录、更新 `theme.json`，并在主题会话已运行时重新注入。`-ThemeId`、`-ThemeName`、`-FocusX`、`-FocusY`、`-SafeArea` 和 `-TaskMode` 均可选；省略时保留当前预设配置。主题 ID 仅允许小写字母、数字和连字符，主题名最多 80 个字符。
 
 ## 创建有名称的预设
 
