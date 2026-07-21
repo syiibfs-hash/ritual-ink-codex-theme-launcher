@@ -4,8 +4,6 @@
 
 > **仅支持 Windows。** 本项目为 Microsoft Store 版 Codex Windows 桌面应用设计；macOS 与 Linux 不在支持范围内。
 
-当前发布版：[v1.1.1](https://github.com/syiibfs-hash/ritual-ink-codex-theme-launcher/releases/tag/v1.1.1)。开发环境基线为 `OpenAI.Codex 26.715.7063.0`；Codex 更新可能调整界面 DOM，升级后请先运行自检并提交兼容性反馈。
-
 ![落樱主题背景示例](assets/falling-sakura-wallpaper.jpg)
 
 `落樱` 是内置示例主题：水墨、深蓝与落樱构成的生成式壁纸，搭配定制桌面/缩略图图标，以及低开销的樱花动态效果。该名称仅是主题标签，不指向或声称代表任何角色、作品或权利方。
