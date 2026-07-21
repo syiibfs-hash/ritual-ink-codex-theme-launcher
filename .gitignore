@@ -1,5 +1,6 @@
 # Installed runtime and generated archives
 /CodexThemeLauncher.zip
+/dist/
 /work/
 *.log
 

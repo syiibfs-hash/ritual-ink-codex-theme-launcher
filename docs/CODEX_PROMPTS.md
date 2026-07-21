@@ -4,20 +4,20 @@
 
 ## 安装当前预设：落樱
 
-将下面整段内容发送给 Codex。它下载固定的 `v1.1.0` 发布包，并使用同一发布页的 SHA-256 文件校验下载结果；不会使用 `Invoke-Expression`、不会直接执行网络响应。
+将下面整段内容发送给 Codex。它下载固定的 `v1.1.1` 发布包，并使用同一发布页的 SHA-256 文件校验下载结果；不会使用 `Invoke-Expression`、不会直接执行网络响应。
 
 ```text
 请在当前 Windows 用户下安装 Codex Windows 主题启动器的内置预设“落樱”。
 
 发布包：
-https://github.com/syiibfs-hash/ritual-ink-codex-theme-launcher/releases/download/v1.1.0/CodexThemeLauncher-v1.1.0.zip
+https://github.com/syiibfs-hash/ritual-ink-codex-theme-launcher/releases/download/v1.1.1/CodexThemeLauncher-v1.1.1.zip
 校验文件：
-https://github.com/syiibfs-hash/ritual-ink-codex-theme-launcher/releases/download/v1.1.0/CodexThemeLauncher-v1.1.0.zip.sha256
+https://github.com/syiibfs-hash/ritual-ink-codex-theme-launcher/releases/download/v1.1.1/CodexThemeLauncher-v1.1.1.zip.sha256
 
 请严格按以下要求执行：
 1. 仅支持 Windows。先检查 Microsoft Store 官方 OpenAI.Codex 应用和 PATH 中的 Node.js 22+；任一条件不满足则停止并说明原因。
 2. 将 ZIP 和 .sha256 下载到临时目录；读取 .sha256 文件中的 SHA-256 值，计算 ZIP 的 SHA-256 并比较。不匹配则停止，绝不解压或执行。
-3. 校验通过后，将 ZIP 解压到 %LOCALAPPDATA%\CodexThemeLauncher\packages\falling-sakura-v1.1.0；不要改写 WindowsApps、app.asar、注册表、API Key、Base URL、登录信息、项目或插件设置。
+3. 校验通过后，将 ZIP 解压到 %LOCALAPPDATA%\CodexThemeLauncher\packages\falling-sakura-v1.1.1；不要改写 WindowsApps、app.asar、注册表、API Key、Base URL、登录信息、项目或插件设置。
 4. 从解压目录运行 install.ps1，并传入 -ShortcutName "Codex - 落樱"。安装器创建的桌面与开始菜单快捷方式应保持隐藏启动，不打开额外终端或托盘窗口。
 5. 运行安装后 engine\scripts\injector.mjs 的 --self-test，主题目录使用 %LOCALAPPDATA%\CodexThemeLauncher\active-theme。不要自动关闭或启动当前正在使用的 Codex 窗口。
 6. 最后只报告下载版本、SHA-256 校验结果、安装目录、创建的快捷方式和自检结果。

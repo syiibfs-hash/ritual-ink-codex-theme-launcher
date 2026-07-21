@@ -4,6 +4,8 @@
 
 > **仅支持 Windows。** 本项目为 Microsoft Store 版 Codex Windows 桌面应用设计；macOS 与 Linux 不在支持范围内。
 
+当前发布版：[v1.1.1](https://github.com/syiibfs-hash/ritual-ink-codex-theme-launcher/releases/tag/v1.1.1)。开发环境基线为 `OpenAI.Codex 26.715.7063.0`；Codex 更新可能调整界面 DOM，升级后请先运行自检并提交兼容性反馈。
+
 ![落樱主题背景示例](assets/falling-sakura-wallpaper.jpg)
 
 `落樱` 是内置示例主题：水墨、深蓝与落樱构成的生成式壁纸，搭配定制桌面/缩略图图标，以及低开销的樱花动态效果。该名称仅是主题标签，不指向或声称代表任何角色、作品或权利方。
@@ -95,4 +97,10 @@ powershell -NoProfile -ExecutionPolicy RemoteSigned -File "$env:LOCALAPPDATA\Cod
 
 本仓库的主题 CSS 与渲染注入器在 [Fei-Away/Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin) Windows 实现基础上进行了修改，遵循随仓库附带的 MIT 许可证。具体来源、软件许可与示例素材的独立权利声明见 [NOTICE.md](NOTICE.md)。
 
-示例壁纸与图标仅用于演示预设，未包含在 MIT 软件许可证中。公开再分发、商用或二次使用前，请自行确认相关图片生成服务、素材、商标及其他权利。
+示例壁纸、图标和宣传截图由维护者创作，可作为本仓库、其 Fork 或正式发布包的一部分公开再分发；它们不包含在 MIT 软件许可证中，也不可被单独转售或单独授权。详细范围见 [素材声明](assets/ARTWORK_NOTICE.md)。
+
+## 维护与安全
+
+- 安全问题请遵循 [SECURITY.md](SECURITY.md)，不要在公开 Issue 中附带敏感信息。
+- 安装、兼容性和文档问题可通过 Issue 提交；贡献流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+- 发布构建和校验步骤见 [docs/RELEASE.md](docs/RELEASE.md)。
