@@ -1,6 +1,8 @@
-# 落樱 for Codex
+# Codex皮肤 / Codex主题：落樱（Windows 桌面端）
 
-> 面向 Windows 的 Codex 桌面端主题启动器。原生交互不变，主题可还原，不改官方安装目录。
+> 面向 Windows 的 Codex皮肤与 Codex主题启动器。为 Codex 桌面端提供主题壁纸、个性化图标和动态樱花效果；原生交互不变，主题可还原，不改官方安装目录。
+
+**搜索关键词：** `Codex皮肤`、`Codex主题`、`Codex换肤`、`Codex桌面端主题`、`OpenAI Codex theme`、`Codex skin`、`Windows Codex`。
 
 > **仅支持 Windows。** 本项目为 Microsoft Store 版 Codex Windows 桌面应用设计；macOS 与 Linux 不在支持范围内。
 
