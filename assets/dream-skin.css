@@ -202,7 +202,6 @@ html.codex-dream-skin .dream-task [data-message-author-role] {
 /* The home route keeps the source image expressive, with a semantic safe-area
    wash selected from image focus metadata. */
 html.codex-dream-skin .dream-home {
-  --thread-content-max-width: min(1180px, calc(100cqw - 56px)) !important;
   overflow-x: hidden !important;
   background: var(--dream-surface) !important;
 }
@@ -746,10 +745,6 @@ html.codex-dream-skin #codex-dream-skin-petals .dream-petal {
 }
 
 @media (max-width: 1120px) {
-  html.codex-dream-skin .dream-home {
-    --thread-content-max-width: min(940px, calc(100cqw - 36px)) !important;
-  }
-
   .dream-home > div:first-child > div:first-child > div:first-child {
     width: calc(100% - 36px) !important;
   }
@@ -818,5 +813,41 @@ html.codex-dream-skin #codex-dream-skin-petals .dream-petal {
   html.codex-dream-skin *::after {
     scroll-behavior: auto !important;
     transition-duration: .01ms !important;
+  }
+}
+
+/* Recent Codex builds can wrap suggestion cards into a second row, which makes
+   the route scroll before the native bottom composer becomes visible. Keep the
+   cards compact without changing the home route's own flex layout. */
+@media (min-width: 901px) {
+  html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
+    .dream-home .group\/home-suggestions {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: minmax(164px, 1fr) !important;
+    grid-template-columns: repeat(4, minmax(164px, 1fr)) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none;
+  }
+
+  html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
+    .dream-home .group\/home-suggestions::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
+    .dream-home .group\/home-suggestions button {
+    min-height: clamp(84px, 10dvh, 96px) !important;
+    padding: 12px !important;
+  }
+
+  html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
+    .dream-home .group\/home-suggestions button > span:first-child > span:first-child {
+    width: 32px !important;
+    height: 32px !important;
+    box-shadow: 0 0 0 4px var(--dream-accent-soft) !important;
   }
 }
