@@ -824,10 +824,11 @@ html.codex-dream-skin #codex-dream-skin-petals .dream-petal {
     .dream-home .group\/home-suggestions {
     display: grid !important;
     grid-auto-flow: column !important;
-    grid-auto-columns: minmax(164px, 1fr) !important;
-    grid-template-columns: repeat(4, minmax(164px, 1fr)) !important;
+    grid-auto-columns: clamp(280px, 26cqw, 340px) !important;
+    grid-template-columns: none !important;
     grid-template-rows: minmax(0, 1fr) !important;
     gap: 10px !important;
+    justify-content: start !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     scrollbar-width: none;
@@ -840,8 +841,26 @@ html.codex-dream-skin #codex-dream-skin-petals .dream-petal {
 
   html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
     .dream-home .group\/home-suggestions button {
-    min-height: clamp(84px, 10dvh, 96px) !important;
-    padding: 12px !important;
+    min-height: clamp(100px, 12dvh, 116px) !important;
+    padding: 14px !important;
+    white-space: normal !important;
+    text-overflow: clip !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
+    .dream-home .group\/home-suggestions button .truncate,
+  html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
+    .dream-home .group\/home-suggestions button [class*="truncate" i] {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
+    .dream-home .group\/home-suggestions:has(> button:only-child) {
+    justify-content: center !important;
   }
 
   html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell

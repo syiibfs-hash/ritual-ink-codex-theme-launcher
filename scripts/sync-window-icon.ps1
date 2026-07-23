@@ -3,7 +3,8 @@ param(
   [Parameter(Mandatory = $true)][string]$CodexExecutable,
   [Parameter(Mandatory = $true)][string]$IconPath,
   [int]$StartupTimeoutSeconds = 45,
-  [int]$PollMilliseconds = 1500
+  [int]$PollMilliseconds = 1500,
+  [switch]$Once
 )
 
 $ErrorActionPreference = 'Stop'
@@ -29,7 +30,6 @@ namespace CodexThemeLauncher {
   public static class WindowIconNative {
     private const uint WM_SETICON = 0x0080;
     private const int ICON_SMALL = 0;
-    private const int ICON_BIG = 1;
     private const uint IMAGE_ICON = 1;
     private const uint LR_LOADFROMFILE = 0x0010;
 
@@ -57,8 +57,7 @@ namespace CodexThemeLauncher {
       return LoadImage(IntPtr.Zero, path, IMAGE_ICON, size, size, LR_LOADFROMFILE);
     }
 
-    public static void Apply(IntPtr window, IntPtr largeIcon, IntPtr smallIcon) {
-      SendMessage(window, WM_SETICON, new IntPtr(ICON_BIG), largeIcon);
+    public static void ApplySmall(IntPtr window, IntPtr smallIcon) {
       SendMessage(window, WM_SETICON, new IntPtr(ICON_SMALL), smallIcon);
     }
   }
@@ -67,10 +66,8 @@ namespace CodexThemeLauncher {
   $native = [CodexThemeLauncher.WindowIconNative]
 }
 
-$largeIcon = $native::LoadIcon($IconPath, 64)
 $smallIcon = $native::LoadIcon($IconPath, 32)
-if ($largeIcon -eq [IntPtr]::Zero -or $smallIcon -eq [IntPtr]::Zero) {
-  if ($largeIcon -ne [IntPtr]::Zero) { [void]$native::DestroyIcon($largeIcon) }
+if ($smallIcon -eq [IntPtr]::Zero) {
   if ($smallIcon -ne [IntPtr]::Zero) { [void]$native::DestroyIcon($smallIcon) }
   throw "Windows could not load the icon: $IconPath"
 }
@@ -98,19 +95,21 @@ try {
     if ($handles.Count -gt 0) {
       $attached = $true
       foreach ($handle in $handles) {
-        $native::Apply($handle, $largeIcon, $smallIcon)
+        # ICON_SMALL controls the thumbnail/title-bar glyph. Leave ICON_BIG
+        # untouched so the official pinned taskbar icon remains authoritative.
+        $native::ApplySmall($handle, $smallIcon)
         $handleKey = $handle.ToInt64().ToString()
         if (-not $announcedHandles.ContainsKey($handleKey)) {
           $announcedHandles[$handleKey] = $true
           Write-Output "Applied the custom Codex icon to window 0x$($handle.ToInt64().ToString('X'))."
         }
       }
+      if ($Once) { break }
     } elseif ($attached -or (Get-Date) -ge $deadline) {
       break
     }
     Start-Sleep -Milliseconds $PollMilliseconds
   }
 } finally {
-  [void]$native::DestroyIcon($largeIcon)
   [void]$native::DestroyIcon($smallIcon)
 }
