@@ -136,7 +136,7 @@
   const existingStyle = document.getElementById(STYLE_ID);
   if (existingStyle) {
     existingStyle.textContent = cssText;
-    existingStyle.dataset.dreamVersion = "4";
+    existingStyle.dataset.dreamVersion = "7";
   }
 
   const analyzeArt = () => new Promise((resolve) => {
@@ -312,6 +312,7 @@
     document.querySelectorAll(".dream-home").forEach((node) => node.classList.remove("dream-home"));
     document.querySelectorAll(".dream-task").forEach((node) => node.classList.remove("dream-task"));
     document.querySelectorAll(".dream-home-shell").forEach((node) => node.classList.remove("dream-home-shell"));
+    document.querySelectorAll(".dream-task-shell").forEach((node) => node.classList.remove("dream-task-shell"));
     document.querySelectorAll(`.${HOME_UTILITY_CLASS}`).forEach((node) => node.classList.remove(HOME_UTILITY_CLASS));
     document.getElementById(STYLE_ID)?.remove();
     document.getElementById(CHROME_ID)?.remove();
@@ -419,17 +420,24 @@
       style.id = STYLE_ID;
       (document.head || root).appendChild(style);
     }
-    if (style.dataset.dreamVersion !== "4") {
+    if (style.dataset.dreamVersion !== "7") {
       style.textContent = cssText;
-      style.dataset.dreamVersion = "4";
+      style.dataset.dreamVersion = "7";
     }
 
-    const home = document.querySelector('[role="main"]:has([data-testid="home-icon"])');
+    // Treat a surface without rendered conversation content as a home shell.
+    // Codex 26.721 changed that page's DOM substantially, so never attach the
+    // legacy `dream-home` layout class to live app content.
+    const explicitHome = document.querySelector('[role="main"]:has([data-testid="home-icon"])');
     const mainCandidates = [...document.querySelectorAll('[role="main"]')];
     if (!mainCandidates.length) mainCandidates.push(shellMain);
+    const hasConversationContent = (candidate) => Boolean(
+      candidate.querySelector("article, [data-message-author-role], .thread-scroll-container")
+    );
+    const home = explicitHome || mainCandidates.find((candidate) => !hasConversationContent(candidate)) || null;
     for (const candidate of mainCandidates) {
-      candidate.classList.toggle("dream-home", candidate === home);
-      candidate.classList.toggle("dream-task", candidate !== home);
+      candidate.classList.remove("dream-home");
+      candidate.classList.toggle("dream-task", candidate !== home && hasConversationContent(candidate));
     }
     const utilityBars = new Set(home ? home.querySelectorAll('[class*="_homeUtilityBar_"]') : []);
     for (const candidate of document.querySelectorAll(`.${HOME_UTILITY_CLASS}`)) {
@@ -437,6 +445,7 @@
     }
     for (const candidate of utilityBars) candidate.classList.add(HOME_UTILITY_CLASS);
     shellMain.classList.toggle("dream-home-shell", Boolean(home));
+    shellMain.classList.toggle("dream-task-shell", mainCandidates.some((candidate) => candidate.classList.contains("dream-task")));
 
     let chrome = document.getElementById(CHROME_ID);
     if (!chrome || chrome.parentElement !== document.body) {

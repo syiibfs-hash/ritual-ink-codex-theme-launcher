@@ -430,7 +430,7 @@ html.codex-dream-skin article {
    title bar and route surface become coordinated readability layers instead
    of repeating or cropping the image inside individual panels. */
 html.codex-dream-skin.dream-art-wide:has(main.main-surface.dream-home-shell) body,
-html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface:not(.dream-home-shell)) body {
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface.dream-task-shell) body {
   background-color: var(--dream-canvas) !important;
   background-image: var(--dream-art) !important;
   background-position: var(--dream-art-position) !important;
@@ -441,7 +441,7 @@ html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
 
 html.codex-dream-skin.dream-art-wide:has(main.main-surface.dream-home-shell)
   aside.app-shell-left-panel,
-html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface:not(.dream-home-shell))
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface.dream-task-shell)
   aside.app-shell-left-panel {
   background: linear-gradient(180deg, rgb(20 22 30 / .62), rgb(24 28 37 / .56)) !important;
   border: 0 !important;
@@ -451,20 +451,20 @@ html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
   backdrop-filter: blur(12px) saturate(.92) !important;
 }
 
-html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface:not(.dream-home-shell))
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface.dream-task-shell)
   aside.app-shell-left-panel {
   background: linear-gradient(180deg, rgb(20 22 30 / .64), rgb(24 28 37 / .59)) !important;
 }
 
 html.codex-dream-skin.dream-art-wide:has(main.main-surface.dream-home-shell)
   aside.app-shell-left-panel::after,
-html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface:not(.dream-home-shell))
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner):has(main.main-surface.dream-task-shell)
   aside.app-shell-left-panel::after {
   background: transparent !important;
 }
 
 html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell,
-html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner) main.main-surface:not(.dream-home-shell) {
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner) main.main-surface.dream-task-shell {
   background: linear-gradient(90deg,
     var(--dream-immersive-edge),
     var(--dream-immersive-mid) 64%,
@@ -474,18 +474,18 @@ html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
   box-shadow: none !important;
 }
 
-html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner) main.main-surface:not(.dream-home-shell) {
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner) main.main-surface.dream-task-shell {
   background: linear-gradient(90deg,
     var(--dream-task-immersive-edge),
     var(--dream-task-immersive-mid) 64%,
     var(--dream-task-immersive-far)) !important;
 }
 
-html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner) .dream-task {
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner) main.main-surface.dream-task-shell .dream-task {
   background: transparent !important;
 }
 
-html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner) .dream-task::before {
+html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner) main.main-surface.dream-task-shell .dream-task::before {
   content: none !important;
 }
 
@@ -560,18 +560,17 @@ html.codex-dream-skin .dream-home:has(.dream-home-utility) .composer-surface-chr
     inset 0 -1px var(--dream-immersive-line) !important;
 }
 
-/* Plugins, scheduled tasks and search routes ship opaque sticky wrappers.
-   Clear only full-window or sticky route chrome, leaving functional cards and
-   their hover states intact. */
+/* Confirmed task routes can ship opaque sticky wrappers. Clear only their
+   full-window chrome, leaving fresh-task and functional card surfaces intact. */
 html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
-  main.main-surface:not(.dream-home-shell) div.sticky:has(input[type="text"]),
+  main.main-surface.dream-task-shell div.sticky:has(input[type="text"]),
 html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
-  main.main-surface:not(.dream-home-shell) div.sticky:has(input[type="text"])::after {
+  main.main-surface.dream-task-shell div.sticky:has(input[type="text"])::after {
   background: transparent !important;
 }
 
 html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
-  main.main-surface:not(.dream-home-shell) div.no-drag:has(> input[type="text"]) {
+  main.main-surface.dream-task-shell div.no-drag:has(> input[type="text"]) {
   background: var(--dream-immersive-composer) !important;
   border: 0 !important;
   box-shadow: inset 0 0 0 1px var(--dream-immersive-line) !important;
@@ -579,7 +578,7 @@ html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
 }
 
 html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
-  main.main-surface:not(.dream-home-shell)
+  main.main-surface.dream-task-shell
   [class~="bg-token-main-surface-primary"][class~="h-full"][class~="w-full"] {
   background: transparent !important;
 }
@@ -644,7 +643,7 @@ html.codex-dream-skin.dream-art-wide .composer-surface-chrome,
 html.codex-dream-skin .dream-home-utility,
 html.codex-dream-skin.dream-art-wide .dream-home-utility,
 html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
-  main.main-surface:not(.dream-home-shell) div.no-drag:has(> input[type="text"]) {
+  main.main-surface.dream-task-shell div.no-drag:has(> input[type="text"]) {
   background: rgb(26 29 38 / .72) !important;
   border: 1px solid rgb(78 101 126 / .78) !important;
   border-width: 1px !important;
