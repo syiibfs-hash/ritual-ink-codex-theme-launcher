@@ -136,7 +136,7 @@
   const existingStyle = document.getElementById(STYLE_ID);
   if (existingStyle) {
     existingStyle.textContent = cssText;
-    existingStyle.dataset.dreamVersion = "7";
+    existingStyle.dataset.dreamVersion = "9";
   }
 
   const analyzeArt = () => new Promise((resolve) => {
@@ -420,9 +420,9 @@
       style.id = STYLE_ID;
       (document.head || root).appendChild(style);
     }
-    if (style.dataset.dreamVersion !== "7") {
+    if (style.dataset.dreamVersion !== "9") {
       style.textContent = cssText;
-      style.dataset.dreamVersion = "7";
+      style.dataset.dreamVersion = "9";
     }
 
     // Treat a surface without rendered conversation content as a home shell.
@@ -431,6 +431,13 @@
     const explicitHome = document.querySelector('[role="main"]:has([data-testid="home-icon"])');
     const mainCandidates = [...document.querySelectorAll('[role="main"]')];
     if (!mainCandidates.length) mainCandidates.push(shellMain);
+    // Codex retains the outer main shell while changing routes. Clear route
+    // classes from every previously marked surface before classifying the
+    // newly mounted page, otherwise a stale task pseudo-element can redraw the
+    // artwork over the fresh-task canvas.
+    for (const candidate of document.querySelectorAll('.dream-home, .dream-task')) {
+      candidate.classList.remove("dream-home", "dream-task");
+    }
     const hasConversationContent = (candidate) => Boolean(
       candidate.querySelector("article, [data-message-author-role], .thread-scroll-container")
     );
@@ -445,7 +452,7 @@
     }
     for (const candidate of utilityBars) candidate.classList.add(HOME_UTILITY_CLASS);
     shellMain.classList.toggle("dream-home-shell", Boolean(home));
-    shellMain.classList.toggle("dream-task-shell", mainCandidates.some((candidate) => candidate.classList.contains("dream-task")));
+    shellMain.classList.toggle("dream-task-shell", !home && mainCandidates.some((candidate) => candidate.classList.contains("dream-task")));
 
     let chrome = document.getElementById(CHROME_ID);
     if (!chrome || chrome.parentElement !== document.body) {
