@@ -511,6 +511,16 @@ html.codex-dream-skin.dream-art-wide main.main-surface > header.app-header-tint 
     0 0 8px color-mix(in oklab, var(--dream-canvas) 58%, transparent) !important;
 }
 
+/* Codex 26.727 replaced the header's stable class with a CSS-module hash.
+   Keep its native layout, but clear the opaque lower edge that would otherwise
+   cut across the single-image canvas. */
+html.codex-dream-skin.dream-art-wide main.main-surface > header {
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
 html.codex-dream-skin.dream-art-wide main.main-surface > header.app-header-tint svg {
   filter: drop-shadow(0 1px 2px color-mix(in oklab, var(--dream-canvas) 72%, transparent));
 }

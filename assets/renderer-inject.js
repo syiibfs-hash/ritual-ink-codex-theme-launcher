@@ -59,6 +59,7 @@
     "--dream-image-luma",
   ];
   const HOME_UTILITY_CLASS = "dream-home-utility";
+  const MAIN_SURFACE_ALIAS_ATTRIBUTE = "data-codex-dream-main-surface-alias";
   const installToken = {};
   let samplingNativeShell = false;
   let observer = null;
@@ -136,7 +137,7 @@
   const existingStyle = document.getElementById(STYLE_ID);
   if (existingStyle) {
     existingStyle.textContent = cssText;
-    existingStyle.dataset.dreamVersion = "9";
+    existingStyle.dataset.dreamVersion = "10";
   }
 
   const analyzeArt = () => new Promise((resolve) => {
@@ -314,6 +315,10 @@
     document.querySelectorAll(".dream-home-shell").forEach((node) => node.classList.remove("dream-home-shell"));
     document.querySelectorAll(".dream-task-shell").forEach((node) => node.classList.remove("dream-task-shell"));
     document.querySelectorAll(`.${HOME_UTILITY_CLASS}`).forEach((node) => node.classList.remove(HOME_UTILITY_CLASS));
+    document.querySelectorAll(`[${MAIN_SURFACE_ALIAS_ATTRIBUTE}]`).forEach((node) => {
+      node.classList.remove("main-surface");
+      node.removeAttribute(MAIN_SURFACE_ALIAS_ATTRIBUTE);
+    });
     document.getElementById(STYLE_ID)?.remove();
     document.getElementById(CHROME_ID)?.remove();
     document.getElementById(PETAL_ID)?.remove();
@@ -411,6 +416,14 @@
       return;
     }
 
+    // Codex 26.727 replaced the stable `main-surface` class with a CSS-module
+    // hash. Restore that semantic hook only for this live renderer so the
+    // existing theme rules keep targeting the real content surface.
+    if (!shellMain.classList.contains("main-surface")) {
+      shellMain.classList.add("main-surface");
+      shellMain.setAttribute(MAIN_SURFACE_ALIAS_ATTRIBUTE, "true");
+    }
+
     root.classList.add("codex-dream-skin");
     applyProfile(root);
 
@@ -420,9 +433,9 @@
       style.id = STYLE_ID;
       (document.head || root).appendChild(style);
     }
-    if (style.dataset.dreamVersion !== "9") {
+    if (style.dataset.dreamVersion !== "10") {
       style.textContent = cssText;
-      style.dataset.dreamVersion = "9";
+      style.dataset.dreamVersion = "10";
     }
 
     // Treat a surface without rendered conversation content as a home shell.
@@ -499,7 +512,7 @@
   });
   const timer = setInterval(ensure, 5000);
   window[STATE_KEY] = {
-    ensure, cleanup, observer, timer, scheduler, artUrl, profile, config, installToken, version: "1.2.0",
+    ensure, cleanup, observer, timer, scheduler, artUrl, profile, config, installToken, version: "1.3.0",
   };
   ensure();
   analyzeArt().then((result) => {
@@ -509,5 +522,5 @@
     state.profile = result;
     ensure();
   });
-  return { installed: true, version: "1.2.0", adaptive: true };
+  return { installed: true, version: "1.3.0", adaptive: true };
 })(__DREAM_CSS_JSON__, __DREAM_ART_JSON__, __DREAM_THEME_JSON__)
