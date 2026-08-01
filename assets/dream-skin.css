@@ -516,6 +516,24 @@ html.codex-dream-skin.dream-art-wide main.main-surface > header {
   backdrop-filter: none !important;
 }
 
+/* The home header has controls but no task title. Give it the same quiet ink
+   surface as task routes, without reintroducing a distinct divider or blur. */
+html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell > header {
+  background: linear-gradient(90deg,
+    var(--dream-task-immersive-edge),
+    var(--dream-task-immersive-mid) 64%,
+    var(--dream-task-immersive-far)) !important;
+}
+
+html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell > header::before,
+html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell > header::after,
+html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell [class*="MainContentFrame_"]::before,
+html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell [class*="MainContentFrame_"]::after {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
 html.codex-dream-skin.dream-art-wide main.main-surface > header.app-header-tint svg {
   filter: drop-shadow(0 1px 2px color-mix(in oklab, var(--dream-canvas) 72%, transparent));
 }
