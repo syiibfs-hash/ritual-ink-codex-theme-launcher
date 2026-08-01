@@ -637,7 +637,10 @@ html.codex-dream-skin.dream-art-wide main.main-surface [class*="MainContentFrame
   border-top: 0 !important;
 }
 
-html.codex-dream-skin.dream-art-wide main.main-surface .app-shell-main-content-top-fade {
+/* Codex 26.727 renamed the top fade to a CSS-module class. It draws a dark
+   16px gradient across the otherwise seamless main canvas. */
+html.codex-dream-skin.dream-art-wide main.main-surface .app-shell-main-content-top-fade,
+html.codex-dream-skin.dream-art-wide main.main-surface [class*="MainContentTopFade_"] {
   display: none !important;
   background: transparent !important;
 }
