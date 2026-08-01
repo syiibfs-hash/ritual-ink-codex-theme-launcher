@@ -122,9 +122,9 @@ html.codex-dream-skin main.main-surface > header.app-header-tint {
 html.codex-dream-skin.dream-theme-dark [class~="group/application-menu-top-bar"],
 html.codex-dream-skin.dream-theme-dark [class*="ApplicationMenuTopBar_"] {
   color: var(--dream-text) !important;
-  background: rgb(14 17 24 / .96) !important;
+  background: linear-gradient(90deg, rgb(40 46 59 / .9), rgb(28 37 51 / .86)) !important;
   border-bottom: 1px solid var(--dream-line-soft) !important;
-  box-shadow: 0 1px 12px color-mix(in oklab, var(--dream-canvas) 72%, transparent) !important;
+  box-shadow: 0 1px 12px rgb(13 18 27 / .22) !important;
   backdrop-filter: blur(16px) saturate(.9) !important;
 }
 
@@ -509,9 +509,9 @@ html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell .dream-t
 html.codex-dream-skin.dream-art-wide main.main-surface > header {
   inset-inline-start: 0 !important;
   color: var(--dream-text) !important;
-  background: rgb(18 21 29 / .9) !important;
+  background: linear-gradient(90deg, rgb(54 57 67 / .78), rgb(35 44 58 / .76) 58%, rgb(29 39 53 / .7)) !important;
   border-bottom: 1px solid rgb(111 132 156 / .34) !important;
-  box-shadow: 0 1px 14px rgb(12 15 22 / .2) !important;
+  box-shadow: 0 1px 14px rgb(12 15 22 / .16) !important;
   backdrop-filter: blur(14px) saturate(.92) !important;
 }
 
@@ -538,10 +538,12 @@ html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
 
 html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell
   .dream-home .group\/home-suggestions button {
-  background: color-mix(in oklab, var(--dream-surface-raised) 58%, transparent) !important;
-  box-shadow: 0 8px 22px color-mix(in oklab, var(--dream-canvas) 18%, transparent),
-    inset 0 0 0 1px var(--dream-immersive-line) !important;
-  backdrop-filter: blur(8px) saturate(1.04) !important;
+  background: linear-gradient(145deg, rgb(48 55 69 / .66), rgb(30 40 55 / .6)) !important;
+  border-color: rgb(130 148 171 / .5) !important;
+  box-shadow: 0 8px 22px rgb(12 17 27 / .14),
+    inset 0 1px rgb(232 237 239 / .1),
+    inset 0 0 0 1px rgb(130 148 171 / .3) !important;
+  backdrop-filter: blur(12px) saturate(.94) !important;
 }
 
 /* The composer owns exactly one solid readability surface. Native bottom
