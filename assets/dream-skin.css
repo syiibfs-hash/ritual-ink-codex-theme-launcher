@@ -516,13 +516,10 @@ html.codex-dream-skin.dream-art-wide main.main-surface > header {
   backdrop-filter: none !important;
 }
 
-/* The home header has controls but no task title. Give it the same quiet ink
-   surface as task routes, without reintroducing a distinct divider or blur. */
+/* The home header has controls but no task title. It must disappear into the
+   same continuous canvas as the rest of the home surface. */
 html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell > header {
-  background: linear-gradient(90deg,
-    var(--dream-task-immersive-edge),
-    var(--dream-task-immersive-mid) 64%,
-    var(--dream-task-immersive-far)) !important;
+  background: transparent !important;
 }
 
 html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell > header::before,
