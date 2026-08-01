@@ -504,10 +504,11 @@ html.codex-dream-skin.dream-art-wide main.main-surface.dream-home-shell .dream-t
 }
 
 /* Codex 26.727 replaced the stable header class with a CSS-module hash and
-   applies a duplicate sidebar-width offset to it. Correct only that offset so
-   title and right-side controls retain their native geometry. */
+   offsets it twice: once in flow and once visually. Keep the native controls,
+   but return the row to the normal compact flow position. */
 html.codex-dream-skin.dream-art-wide main.main-surface > header {
-  inset-inline-start: 0 !important;
+  position: static !important;
+  inset: auto !important;
   color: var(--dream-text) !important;
   background: transparent !important;
   border-bottom: 0 !important;
@@ -613,7 +614,11 @@ html.codex-dream-skin.dream-art-wide:is(.dream-task-ambient, .dream-task-banner)
   background: transparent !important;
 }
 
-html.codex-dream-skin.dream-art-wide main.main-surface .app-shell-main-content-frame {
+/* The current build renamed the frame class and adds a second title-row gap
+   plus a bright top border. The compact header above already reserves space. */
+html.codex-dream-skin.dream-art-wide main.main-surface .app-shell-main-content-frame,
+html.codex-dream-skin.dream-art-wide main.main-surface [class*="MainContentFrame_"] {
+  margin-top: 0 !important;
   border-top: 0 !important;
 }
 
